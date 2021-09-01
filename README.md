@@ -16,3 +16,7 @@
 - mind. 4 ID-Chips
 - Lan Kabel 5
 - evtl Router
+
+# NOTICE
+
+**Immer die requirements.txt aktualisieren und alle Package installieren mit 'py -3 -m pip install -r requirements.txt'**
