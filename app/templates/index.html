@@ -1,12 +1,5 @@
 {% extends 'base.html' %} 
-{% block head %}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/chronos_icon.ico') }}">
-<meta name="keywords" content="Chronos, zeiterfassung, zeiterfassungssystem, zeit">
-<title>Chronos Zeiterfassungssystem</title>
-{% endblock head %}
+{% block title %}Chronos Zeiterfassungssystem{% endblock title %}
 
 {% block content %}
 <div class="rahmen">

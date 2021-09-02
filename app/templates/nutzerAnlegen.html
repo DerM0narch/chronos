@@ -1,12 +1,12 @@
 {% extends 'base.html' %} 
-{% block head %}Nutzer Anlegen{% endblock head %} 
+{% block title %}Nutzer Anlegen{% endblock title %} 
 {% block content %}
 
 <div class="rahmen">
 
     <main>
     <br>
-        <img src="img/logo.jpg" widht="180" height="180" alt="Logo">
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}" widht="180" height="180" alt="Logo">
         <article>
 <hr>
             <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>

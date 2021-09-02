@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang=de-de>
+{% extends 'base.html' %} 
+{% block title %}Chronos Zeiterfassungssystem{% endblock title %}
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/chronos_icon.ico') }}">
-        <meta name="keywords" content="Chronos, zeiterfassung, zeiterfassungssystem, zeit">
-        <title>Chronos Zeiterfassungssystem</title>
-    </head>
-
-    <body>
+{% block content %}
 	<div class="rahmen">
         <main>
 		<a href="/index.php"><img src="{{ url_for('static', filename='img/logo.jpg') }}" widht="180" height="180" alt="Logo"></a>
@@ -73,5 +64,4 @@ function myFunction() {
 
 	</div>
 	
-</body>
-</html>
+{% endblock content %}
