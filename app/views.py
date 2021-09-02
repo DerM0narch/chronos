@@ -9,9 +9,6 @@ views = Blueprint('views', __name__)
 def index():
     return render_template('index.html')
 
-@views.route("/uebersicht")
-def uebersicht():
-    return render_template('uebersicht.html')
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
 def nutzeranlegen():
