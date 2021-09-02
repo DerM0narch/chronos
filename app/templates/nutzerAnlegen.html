@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-{% block title %}Index{% endblock title %} 
+{% block head %}Nutzer Anlegen{% endblock head %} 
 {% block content %}
 
 <div class="rahmen">
@@ -9,7 +9,7 @@
         <img src="img/logo.jpg" widht="180" height="180" alt="Logo">
         <article>
 <hr>
-            <h2><p>CHronos Zeiterfassungssystem v1.0</p></h2><p>
+            <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>
         </article>
 <section>
 </div>
@@ -36,20 +36,20 @@
         
             <h4>Bitte Fügen Sie die Daten des neuen Nutzers ein</h4>
             
-    <input type="text" placeholder="Nachname" id="nname" name="nname"/>
-    <input type="text" placeholder="Vorname" id="vname" name="vname"/>
+    <input type="text" placeholder="Nachname" required="" id="nname" name="nname"/>
+    <input type="text" placeholder="Vorname" required="" id="vname" name="vname"/>
     <!-- Das System bestimmt den nutzernamen / Kürzel automatisch-->
-    <input type="email" placeholder="E-Mail Adresse" id="email" name="email"/>
-    <input type="password" placeholder="Konto Passwort" id="passwort" name="passwort"/>
-    <input type="text" placeholder="Kartennummer" id="kartennr" name="kartennr"/>
+    <input type="email" placeholder="E-Mail Adresse" required="" id="email" name="email"/>
+    <input type="password" placeholder="Konto Passwort" required="" id="passwort" name="passwort"/>
+    <input type="text" placeholder="Kartennummer" required="" id="kartennr" name="kartennr"/>
            
-    <button class="button_anmeldung"><span>Nutzer hinzufügen</span></button>
+    <button class="button_anmeldung">Nutzer hinzufügen</button>
 </section>
 
                 <p>
 </form>
 </div>
-<!-- Nutzer Anlegen Bereich ENDE -->
+<!-- Nutzer Anlegen ENDE -->
 
 </section>
 
