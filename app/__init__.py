@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
+import os
 
 db = SQLAlchemy()
 DB_NAME = "chronos.db"
@@ -18,7 +19,6 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/")
     
     # from models import Nutzer
-    
     create_database(app)
     return app
     
