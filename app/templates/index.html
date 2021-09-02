@@ -2,7 +2,7 @@
 {% block head %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<link rel="stylesheet" type="text/css" href="style/style.css"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="shortcut icon" type="image/x-icon" href="img/Chronos_icon.ico">
 <meta name="keywords" content="Chronos, zeiterfassung, zeiterfassungssystem, zeit">
 <title>Chronos Zeiterfassungssystem</title>
@@ -13,7 +13,7 @@
 
     <main>
     <br>
-        <img src="img/logo.jpg" widht="180" height="180" alt="Logo">
+        <img src="{{ url_for('static', filename='css/logo.jpg') }}" widht="180" height="180" alt="Logo">
         <article>
 <hr>
             <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>
@@ -39,7 +39,7 @@
 <section>
 <center>
 <div class="login_text">
-        <form action="login.php" method="post">
+        <form action="login.html" method="post">
         
             <h4>Bitte loggen Sie sich ein</h4>
             
