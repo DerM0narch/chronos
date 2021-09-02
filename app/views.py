@@ -9,6 +9,10 @@ views = Blueprint('views', __name__)
 def index():
     return render_template('index.html')
 
+@views.route("/login")
+def index():
+    return render_template('login.html')
+
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
 def nutzeranlegen():
