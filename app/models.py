@@ -1,11 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
-from app import app
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://chronos.db'
-db = SQLAlchemy(app)
+from . import db
 
 
-class nutzer(db.Model):
+class Nutzer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nname = db.Column(db.String(50))
     vname = db.Column(db.String(50))
@@ -16,7 +12,7 @@ class nutzer(db.Model):
     benutzerStatus = db.Column(db.String(10), default='abwesend')
     
 
-class buchung(db.Model):
+class Buchung(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     buchungArt = db.Column(db.String(10),)
     n_kartennr = db.Column(db.String(50), db.ForeignKey('nutzer.id'))
