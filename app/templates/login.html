@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang=de-de>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='css/kronos_icon.ico') }}">
+        <meta name="keywords" content="Chronos, zeiterfassung, zeiterfassungssystem, zeit">
+        <title>Chronos Zeiterfassungssystem</title>
+    </head>
+
+    <body>
+	<div class="rahmen">
+        <main>
+		<a href="/index.php"><img src="{{ url_for('static', filename='css/logo.jpg') }}" widht="180" height="180" alt="Logo"></a>
+            <article>
+<hr>
+                <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>
+            </article>
+
+</div>
+	<section>
+
+		  
+<!-- NAVIGATION START -->
+<div class="rahmen">
+<div class="topnav" id="myTopnav">
+  <a href="/index.php">Zurück zur Startseite</a>
+  <a href="#">Mein Profil</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()"><img src="{{ url_for('static', filename='css/burgermenupng') }}" widht="20" height="20" alt="Logo">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+<!-- NAVIGATION ENDE -->
+
+
+<div class="rahmen">
+<p>
+
+<h3>Willkommen, [User]</h3>
+
+<center>
+
+<button type="button">Kommen stempeln:</button><p>
+<button type="button">Pause stempeln:</button><p>
+<button type="button">Geht:</button><p>
+<button type="button">Abwesend:</button>
+
+<center>
+</div>
+        </main>
+
+<!-- FOOTER Bereich START -->
+<div class="rahmen">
+
+    <footer>
+        <center>Chronos Zeiterfassungssystem v1.0</center>
+    </footer> 
+	<!-- FOOTER Bereich ENDE -->
+
+	</div>
+	
+</body>
+</html>
