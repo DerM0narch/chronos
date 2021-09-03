@@ -20,7 +20,7 @@ def login():
                 login_user(nutzer, remember=True)
                 return redirect(url_for('views.startseite'))
 
-    return render_template('startseite.html', nutzer=current_user)
+    return render_template('index.html', nutzer=current_user)
 
 @auth.route('/logout')
 @login_required

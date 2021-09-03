@@ -6,6 +6,10 @@ from flask_login import login_required, current_user, login_user, logout_user
 views = Blueprint('views', __name__)
 
 
+@views.route("/index")
+def index():
+    return redirect(url_for("auth.login"))
+
 @views.route("/startseite")
 @login_required
 def startseite():
