@@ -1,6 +1,9 @@
-from flask import Flask
+from flask import Flask, redirect
+from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView, AdminIndexView
 from os import path
 import os
 
@@ -24,7 +27,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/")
     
     # Database
-    from .models import Nutzer
+    from .models import Nutzer, Buchung
     
     create_database(app)
     
@@ -35,6 +38,25 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return Nutzer.query.get(int(id))
+    
+    # Admin Panel
+    class AdminView(ModelView):
+        def is_accessible(self):
+            return current_user.is_authenticated
+        
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for("auth.login"))
+        
+    class CustomAdminIndexView(AdminIndexView):
+        def is_accessible(self):
+            return current_user.is_authenticated
+
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for("auth.login"))
+    
+    admin = Admin(app, index_view=CustomAdminIndexView())
+    admin.add_view(AdminView(Nutzer, db.session))
+    admin.add_view(AdminView(Buchung, db.session))
     
     return app
     
