@@ -1,5 +1,6 @@
 from . import db
 from flask import Blueprint, render_template, redirect, url_for, request, flash
+from werkzeug.security import check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from .models import Nutzer
 
@@ -15,7 +16,7 @@ def login():
         nutzer = Nutzer.query.filter_by(nutzername=username).first()
         
         if nutzer:
-            if nutzer.passwort == passwort:
+            if check_password_hash(nutzer.passwort, passwort):
                 flash("Logged in", "succesful")
                 login_user(nutzer, remember=True)
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
 from .models import Nutzer, Buchung
+from werkzeug.security import generate_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
 
 views = Blueprint('views', __name__)
@@ -28,7 +29,7 @@ def nutzeranlegen():
             A_kartennr = request.form.get('kartennr')
 
             benutzer = Nutzer(nname=A_nname, vname=A_vname, nutzername=A_kuerzel,
-                            email=A_email, passwort=A_passwort, 
+                            email=A_email, passwort=generate_password_hash(A_passwort, method='sha256'), 
                             kartennr=A_kartennr)
 
             db.session.add(benutzer)
