@@ -20,7 +20,7 @@ def nutzeranlegen():
         try:
             A_nname = request.form.get('nname')
             A_vname = request.form.get('vname')
-            A_kuerzel = A_nname[:4] + A_vname[:3]
+            A_kuerzel = A_nname[:4].lower() + A_vname[:3].lower()
             A_email = request.form.get('email')
             A_passwort = request.form.get('passwort')
             A_kartennr = request.form.get('kartennr')
