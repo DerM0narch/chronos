@@ -18,9 +18,8 @@ def login():
             if nutzer.passwort == passwort:
                 flash("Logged in", "succesful")
                 login_user(nutzer, remember=True)
-                return redirect(url_for('views.startseite'))
 
-    return render_template('index.html', nutzer=current_user)
+    return render_template('index.html', user=current_user)
 
 @auth.route('/logout')
 @login_required

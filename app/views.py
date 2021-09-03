@@ -13,7 +13,7 @@ def index():
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
 def startseite():
-    return render_template('startseite.html')
+    return render_template('startseite.html', user=current_user)
 
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
