@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
 from .models import Nutzer, Buchung
+from flask_login import login_required, current_user, login_user, logout_user
 
 views = Blueprint('views', __name__)
 
@@ -10,6 +11,7 @@ def index():
     return render_template('index.html')
 
 @views.route("/startseite")
+@login_required
 def startseite():
     return render_template('startseite.html')
 
