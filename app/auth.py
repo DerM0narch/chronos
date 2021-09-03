@@ -6,7 +6,7 @@ from .models import Nutzer
 auth = Blueprint('auth', __name__)
 
 
-@auth.route("/login")
+@auth.route("/")
 def login():
     if request.method == 'POST':
         username = request.form.get('user')
@@ -20,7 +20,7 @@ def login():
                 login_user(nutzer, remember=True)
                 return redirect(url_for('views.startseite'))
 
-    return render_template('login.html', nutzer=current_user)
+    return render_template('startseite.html', nutzer=current_user)
 
 @auth.route('/logout')
 @login_required
