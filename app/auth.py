@@ -19,6 +19,7 @@ def login():
             if check_password_hash(nutzer.passwort, passwort):
                 flash("Logged in", "succesful")
                 login_user(nutzer, remember=True)
+                return redirect(url_for("views.startseite", user=current_user))
 
     return render_template('index.html', user=current_user)
 
