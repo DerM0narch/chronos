@@ -1,9 +1,9 @@
 from flask import Flask, redirect
 from flask.helpers import url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, event
 from flask_login import LoginManager, current_user
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
 from os import path
 import os
 
@@ -40,23 +40,16 @@ def create_app():
         return Nutzer.query.get(int(id))
     
     # Admin Panel
-    class AdminView(ModelView):
-        def is_accessible(self):
-            return current_user.is_authenticated
+    class NutzerView(ModelView):
+        can_create = False
+        can_edit = False
+        column_display_pk = True
+        column_list = ['id', 'nname', 'vname','nutzername', 'email', 'kartennr']
+        column_labels = dict(id='ID', nname='Nachname', vname='Vorname', nutzername='Kuerzel', email='E-Mail', kartennr='Kartennummer')
         
-        def inaccessible_callback(self, name, **kwargs):
-            return redirect(url_for("auth.login"))
-        
-    class CustomAdminIndexView(AdminIndexView):
-        def is_accessible(self):
-            return current_user.is_authenticated
-
-        def inaccessible_callback(self, name, **kwargs):
-            return redirect(url_for("auth.login"))
-    
-    admin = Admin(app, index_view=CustomAdminIndexView())
-    admin.add_view(AdminView(Nutzer, db.session))
-    admin.add_view(AdminView(Buchung, db.session))
+    admin = Admin(app)
+    admin.add_view(NutzerView(Nutzer, db.session))
+    admin.add_view(ModelView(Buchung, db.session))
     
     return app
     

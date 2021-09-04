@@ -23,14 +23,11 @@ def nutzeranlegen():
         try:
             A_nname = request.form.get('nname')
             A_vname = request.form.get('vname')
-            A_kuerzel = A_nname[:4].lower() + A_vname[:3].lower()
             A_email = request.form.get('email')
             A_passwort = request.form.get('passwort')
             A_kartennr = request.form.get('kartennr')
 
-            benutzer = Nutzer(nname=A_nname, vname=A_vname, nutzername=A_kuerzel,
-                            email=A_email, passwort=generate_password_hash(A_passwort, method='sha256'), 
-                            kartennr=A_kartennr)
+            benutzer = Nutzer(nname=A_nname, vname=A_vname, email=A_email, passwort=A_passwort, kartennr=A_kartennr)
 
             db.session.add(benutzer)
             db.session.commit()
