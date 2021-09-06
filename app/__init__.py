@@ -46,6 +46,7 @@ def create_app():
         column_display_pk = True
         column_list = ['id', 'nname', 'vname','nutzername', 'email', 'kartennr']
         column_labels = dict(id='ID', nname='Nachname', vname='Vorname', nutzername='Kuerzel', email='E-Mail', kartennr='Kartennummer')
+        column_searchable_list = ('nname', 'vname', 'email', 'kartennr')
         
     admin = Admin(app)
     admin.add_view(NutzerView(Nutzer, db.session))
