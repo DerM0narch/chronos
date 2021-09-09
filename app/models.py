@@ -11,7 +11,7 @@ class Nutzer(db.Model, UserMixin):
     email = db.Column(db.String(50))
     passwort = db.Column(db.String(50))
     kartennr = db.Column(db.String(50), unique=True)
-    benutzerStatus = db.Column(db.String(10), default='abwesend')
+    benutzerStatus = db.Column(db.String(10), default='abwesend') # 'abwesend', 'anwesend' oder 'in Pause'
     
     def __init__(self, nname, vname, email, passwort, kartennr):
         self.nname = nname
