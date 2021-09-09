@@ -63,7 +63,10 @@ def create_app():
         
     class CustomIndexView(AdminIndexView):
         def is_accessible(self):
-            return current_user.is_authenticated
+            if current_user.id == 1:
+                return current_user.is_authenticated
+            else:
+                return False
         
         def inaccessible_callback(self, name, **kwargs):
             return redirect(url_for('login'))
