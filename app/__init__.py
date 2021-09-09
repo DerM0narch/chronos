@@ -2,7 +2,7 @@ from flask import Flask, redirect
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy, event
 from flask_login import LoginManager, current_user
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from os import path
 import os
@@ -48,9 +48,29 @@ def create_app():
         column_labels = dict(id='ID', nname='Nachname', vname='Vorname', nutzername='Kuerzel', email='E-Mail', kartennr='Kartennummer')
         column_searchable_list = ('nname', 'vname', 'email', 'kartennr')
         
-    admin = Admin(app)
+        def is_accessible(self):
+            return current_user.is_authenticated
+        
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for('login'))
+        
+    class BuchungView(ModelView):
+        def is_accessible(self):
+            return current_user.is_authenticated
+        
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for('login'))
+        
+    class CustomIndexView(AdminIndexView):
+        def is_accessible(self):
+            return current_user.is_authenticated
+        
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for('login'))
+        
+    admin = Admin(app, index_view=CustomIndexView())
     admin.add_view(NutzerView(Nutzer, db.session))
-    admin.add_view(ModelView(Buchung, db.session))
+    admin.add_view(BuchungView(Buchung, db.session))
     
     return app
     
