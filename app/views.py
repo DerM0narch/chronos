@@ -34,12 +34,8 @@ def startseite():
             statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
             statusUpdate.benutzerStatus = 'abwesend'
             db.session.commit()    
-        else:
-            pass # unknown
 
     return render_template('startseite.html', user=current_user)
-
-    
 
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
