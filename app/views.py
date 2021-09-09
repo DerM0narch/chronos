@@ -3,13 +3,14 @@ from . import db
 from .models import Nutzer, Buchung
 from werkzeug.security import generate_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
+from .auth import auth
 
 views = Blueprint('views', __name__)
 
 
 @views.route("/index", methods=["GET", "POST"])
 def index():
-    return redirect(url_for("auth.login"))
+    return redirect(url_for("auth.login"), user=current_user)
 
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
@@ -19,6 +20,9 @@ def startseite():
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
 def nutzeranlegen():
+    if current_user.id != 1:
+        flash("No Access", "error")
+        return redirect(url_for('auth.login'))
     if request.method=="POST":
         try:
             A_nname = request.form.get('nname')
