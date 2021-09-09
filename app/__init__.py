@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, flash
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy, event
 from flask_login import LoginManager, current_user
@@ -39,6 +39,11 @@ def create_app():
     def load_user(id):
         return Nutzer.query.get(int(id))
     
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        flash("No Access", "error")
+        return redirect(url_for('login'))
+    
     # Admin Panel
     class NutzerView(ModelView):
         can_create = False
@@ -52,14 +57,14 @@ def create_app():
             return current_user.is_authenticated
         
         def inaccessible_callback(self, name, **kwargs):
-            return redirect(url_for('login'))
+            return redirect(url_for('login'), user=current_user)
         
     class BuchungView(ModelView):
         def is_accessible(self):
             return current_user.is_authenticated
         
         def inaccessible_callback(self, name, **kwargs):
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         
     class CustomIndexView(AdminIndexView):
         def is_accessible(self):
@@ -69,7 +74,7 @@ def create_app():
                 return False
         
         def inaccessible_callback(self, name, **kwargs):
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         
     admin = Admin(app, index_view=CustomIndexView())
     admin.add_view(NutzerView(Nutzer, db.session))
