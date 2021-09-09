@@ -21,7 +21,7 @@ def login():
                 login_user(nutzer, remember=True)
                 return redirect(url_for("views.startseite", user=current_user))
             else:
-                flash("Nutzername oder Passwort ist falsk", "error")
+                flash("Nutzername oder Passwort ist falsch", "error")
         else:
             flash("Nutzer nicht gefunden. Bitte einen Admin kontaktieren!", "error")
 
