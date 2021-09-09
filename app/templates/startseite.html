@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+{% block title %}Chronos Zeiterfassungssystem{% endblock title %}
+
+{% block content %}
+	<div class="rahmen">
+        <main>
+		<a href="/index.php"><img src="{{ url_for('static', filename='img/logo.jpg') }}" widht="180" height="180" alt="Logo"></a>
+            <article>
+<hr>
+                <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>
+            </article>
+
+</div>
+	<section>
+
+		  
+<!-- NAVIGATION START -->
+{% include 'navbar.html' %}
+<!-- NAVIGATION ENDE -->
+
+
+<div class="rahmen">
+<p>
+
+<h3>Willkommen, {{user.vname}}</h3>
+
+<center>
+
+<button type="button">Kommen stempeln:</button><p>
+<button type="button">Pause stempeln:</button><p>
+<button type="button">Geht:</button><p>
+<button type="button">Abwesend:</button>
+
+<center>
+</div>
+        </main>
+
+<!-- FOOTER Bereich START -->
+<div class="rahmen">
+
+    <footer>
+        <center>Chronos Zeiterfassungssystem v1.0</center>
+    </footer> 
+	<!-- FOOTER Bereich ENDE -->
+
+	</div>
+	
+{% endblock content %}
