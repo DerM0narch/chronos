@@ -1,6 +1,7 @@
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
+from datetime import datetime
 
 class Nutzer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +28,13 @@ class Nutzer(db.Model, UserMixin):
 class Buchung(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     buchungArt = db.Column(db.String(10),)
+    buchungdate = db.Column(db.DateTime, default=datetime.now())
     n_kartennr = db.Column(db.String(50), db.ForeignKey('nutzer.id'))
+    
+    def __init__(self, buchungArt, n_kartennr):
+        self.buchungArt = buchungArt
+        self.buchungdate = datetime.now()
+        self.n_kartennr = n_kartennr
     
     def __repr__(self):
         return f'<Buchung {self.buchungArt} mit {self.n_kartennr}'
