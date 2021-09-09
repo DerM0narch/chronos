@@ -15,7 +15,31 @@ def index():
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
 def startseite():
+    if request.method == 'POST':
+        if request.form['button_startseite'] == 'button_kommen':
+            buchung = Buchung("kommen", current_user.kartennr)
+            db.session.add(buchung)
+            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
+            statusUpdate.benutzerStatus = 'anwesend'
+            db.session.commit()
+        elif request.form['button_startseite'] == 'button_pause':
+            buchung = Buchung("in Pause", current_user.kartennr)
+            db.session.add(buchung)
+            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
+            statusUpdate.benutzerStatus = 'in Pause'
+            db.session.commit()
+        elif request.form['button_startseite'] == 'button_gehen':
+            buchung = Buchung("abwesend", current_user.kartennr)
+            db.session.add(buchung)
+            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
+            statusUpdate.benutzerStatus = 'abwesend'
+            db.session.commit()    
+        else:
+            pass # unknown
+
     return render_template('startseite.html', user=current_user)
+
+    
 
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
