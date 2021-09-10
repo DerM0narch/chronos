@@ -60,6 +60,12 @@ def create_app():
             return redirect(url_for('login'), user=current_user)
         
     class BuchungView(ModelView):
+        column_hide_backrefs = False
+        column_display_pk = True
+        column_list = ['id', 'buchungArt', 'buchungdate', 'n_kartennr']
+        column_labels = dict(id='ID', buchungArt='Buchungsart', buchungdate='Datum & Zeit', n_kartennr='Kartennummer')
+        column_searchable_list = ('ID', 'buchungdate', 'kartennr')
+        
         def is_accessible(self):
             return current_user.is_authenticated
         
