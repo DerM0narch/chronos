@@ -63,7 +63,7 @@ def create_app():
         column_hide_backrefs = False
         column_list = ['buchungArt', 'buchungdate', 'n_kartennr']
         column_labels = dict(buchungArt='Buchungsart', buchungdate='Datum & Zeit', n_kartennr='Kartennummer')
-        column_searchable_list = ('buchungdate', 'kartennr')
+        column_searchable_list = ('buchungdate', 'n_kartennr')
         
         def is_accessible(self):
             return current_user.is_authenticated
