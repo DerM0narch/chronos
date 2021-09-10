@@ -1,7 +1,7 @@
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as gpio
-from app import db
-from app.models import Nutzer, Buchung
+from ..app import db
+from ..app.models import Nutzer, Buchung
 
 
 reader = SimpleMFRC522()
