@@ -9,7 +9,7 @@ class Nutzer(db.Model, UserMixin):
     vname = db.Column(db.String(50))
     nutzername = db.Column(db.String(10), unique=True)
     email = db.Column(db.String(50))
-    passwort = db.Column(db.String(50))
+    passwort = db.Column(db.String(1000))
     kartennr = db.Column(db.String(50), unique=True)
     benutzerStatus = db.Column(db.String(10), default='abwesend') # 'abwesend', 'anwesend' oder 'in Pause'
     
