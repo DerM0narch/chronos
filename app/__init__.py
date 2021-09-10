@@ -47,7 +47,6 @@ def create_app():
     # Admin Panel
     class NutzerView(ModelView):
         can_create = False
-        can_edit = False
         column_display_pk = True
         column_list = ['id', 'nname', 'vname','nutzername', 'email', 'kartennr']
         column_labels = dict(id='ID', nname='Nachname', vname='Vorname', nutzername='Kuerzel', email='E-Mail', kartennr='Kartennummer')
