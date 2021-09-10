@@ -21,9 +21,11 @@
 
 <div class="rahmen">
 <p>
-
+{% if current_user.id == 1 %}
+<h3>Admin Menu</h3>
+{% else %}
 <h3>Willkommen, {{user.vname}}</h3>
-
+{% endif %}
 <center>
 
 <form method="POST">
