@@ -10,7 +10,7 @@ from app.models import Nutzer, Buchung
 reader = SimpleMFRC522()
 
 def RFIDread():
-    GPIO.setwarnings(False)
+    gpio.setwarnings(False)
     while True:
         try:
             kartenid = reader.read()
