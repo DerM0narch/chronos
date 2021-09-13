@@ -1,8 +1,9 @@
 <div class="rahmen">
 <div class="topnav" id="myTopnav">
-  <a href="#"><s>Mein Profil</s></a>
+  <a href="/meinprofil">Mein Profil</a>
   <a href="/logout">Logout</a>
-  {% if current_user.id == 1 %}<a href="/admin">Admin</a>{% endif %}
+  {% if current_user.id == 1 %}<a href="/admin">Admin</a>
+  <a href="/nutzeranlegen"> Nutzer anlegen</a>{% endif %}
   <a href="javascript:void(0);" class="icon" onclick="myFunction()"><img src="{{ url_for('static', filename='img/burgermenu.png') }}" widht="20" height="20" alt="Logo">
     <i class="fa fa-bars"></i>
   </a>

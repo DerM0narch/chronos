@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
 from .models import Nutzer, Buchung
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
 from .auth import auth
 
@@ -69,4 +69,29 @@ def nutzeranlegen():
             
 
     return render_template('nutzerAnlegen.html')
+
+@views.route('/meinprofil', methods=["GET", "POST"])
+def meinProfil():
+    #altes Passwort prüfen
+    if request.method == 'POST':
+        passwort = request.form.get('altes_passwort')
+        neues_passwort_1 = request.form.get('neues_passwort_1')
+        neues_passwort_2 = request.form.get('neues_passwort_2')
+        nutzer = Nutzer.query.filter_by(id=current_user.id).first()
+        
+        if nutzer:
+            if check_password_hash(nutzer.passwort, passwort):
+                if neues_passwort_1 == neues_passwort_2:
+                    try:
+                        nutzer.passwort = generate_password_hash(neues_passwort_1, method='sha256')
+                        db.session.commit()
+                    except Exception:
+                        flash("Fehler unterlaufen", "error")
+                else:
+                    flash("Neue Passwörter sind nicht identtisch", "error")
+            else:
+                flash("Altes Passwort falsch", "error")
+
+    return render_template('meinProfil.html', user=current_user)
+
 

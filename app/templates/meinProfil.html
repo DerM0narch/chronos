@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% block title %}Chronos Zeiterfassungssystem{% endblock title %}
+
+{% block content %}
+	<div class="rahmen">
+        <main>
+		<br>
+		<img src="{{ url_for('static', filename='img/logo.jpg') }}" widht="180" height="180" alt="Logo">
+            <article>
+<hr>
+                <h2><p>Chronos Zeiterfassungssystem v1.0</p></h2><p>
+            </article>
+
+</div>
+	<section>
+
+		  
+<!-- NAVIGATION START -->
+{% include 'navbar.html' %}
+<!-- NAVIGATION ENDE -->
+
+
+<div class="rahmen">
+
+<h3>Mein Profil, {{user.vname}}</h3>
+
+<!-- Kontoname, Passwort ändern, mal schauen-->
+<center>
+
+<form method="POST">
+    Nachname: {{user.nname}}<p>
+    Vorname: {{user.vname}}<p>
+    Kürzel: {{user.kuerzel}}<p>
+    Altes Passwort: <input type="password" name="altes_passwort" value="altes_passwort" placeholder="Altes Passwort"> 
+    Neues Passwort: <input type="password" name="neues_passwort_1" value="neues_passwort_1" placeholder="Neues Passwort">
+    Neues Passwort Wiederholen: <input type="password" name="neues_passwort_2" value="neues_passwort_2" placeholder="Neues Passwort Wiederholen">
+    <button name="passwort_aendern" value="passwort_aendern"> Passwort ändern </button>
+</form>
+<center>
+</div>
+        </main>
+
+<!-- FOOTER Bereich START -->
+
+
+    <footer>
+        <center>Chronos Zeiterfassungssystem 2021</center>
+    </footer> 
+	<!-- FOOTER Bereich ENDE -->
+
+	
+{% endblock content %}
