@@ -26,7 +26,7 @@ def RFIDread():
             
             cur = con.cursor()
             
-            cur.execute(F"SELECT benutzerstatus FROM Nutzer WHERE kartennr={kartenid};")
+            cur.execute(F"SELECT benutzerStatus FROM Nutzer WHERE kartennr={kartenid};")
             result = cur.fetchone()
             print(result)
             if result == "abwesend" or result == "in Pause":
