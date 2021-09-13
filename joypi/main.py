@@ -21,7 +21,7 @@ def RFIDread():
             kartenscan, text = reader.read()
             kartenid = str(kartenscan)
             print("id:" + kartenid)
-            print("id type: " + type(kartenid))
+            print(type(kartenid))
             print("text:" + text)
         finally:
             gpio.cleanup()
@@ -33,7 +33,7 @@ def RFIDread():
             cur.execute("SELECT benutzerStatus FROM Nutzer WHERE kartennr=?", (kartenid,))
             result = str(cur.fetchone()[0])
             print("result:" + result)
-            print("result type: " + type(result))
+            print(type(result))
             if result == "abwesend" or result == "in Pause":
                 cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('anwesend', {str(datetime.now())}, {kartenid})")
                 con.commit()
