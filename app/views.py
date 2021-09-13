@@ -16,9 +16,10 @@ def index():
 @login_required
 def startseite():
     if request.method == 'POST':
+        statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
+
         if request.form['button_startseite'] == 'button_kommen':
             
-            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
             statusUpdate.benutzerStatus = 'anwesend'
             
             buchung = Buchung("anwesend", statusUpdate.kartennr)
@@ -27,7 +28,6 @@ def startseite():
             
         elif request.form['button_startseite'] == 'button_pause':
             
-            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
             statusUpdate.benutzerStatus = 'Pause'
             
             buchung = Buchung("Pause", statusUpdate.kartennr)
@@ -35,7 +35,6 @@ def startseite():
             db.session.commit()
             
         elif request.form['button_startseite'] == 'button_gehen':
-            statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
             statusUpdate.benutzerStatus = 'abwesend'
             
             buchung = Buchung("abwesend", statusUpdate.kartennr)
