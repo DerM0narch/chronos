@@ -7,7 +7,7 @@ import time
 
 DB_NAME = "chronos.db"
 DB_FILE = F'../app/{DB_NAME}'
-
+BUZZER_PIN = 12
 
 reader = SimpleMFRC522()
 
@@ -15,8 +15,8 @@ def RFIDread():
     """ read the card id and add a 'Buchung' according to the last status of the"""    
     con = create_connection(DB_FILE)
     gpio.setwarnings(False)
-    gpio.setmode(gpio.bcm) 
-    gpio.setup(12, gpio.OUT)
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(BUZZER_PIN, gpio.OUT)
     
     while True:
         try:
@@ -44,9 +44,9 @@ def RFIDread():
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', ?, ?)", (str(datetime.now()), kartenid))
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 con.commit()
-        gpio.output(12, gpio.HIGH) 
+        gpio.output(BUZZER_PIN, gpio.HIGH) 
         time.sleep(1)
-        gpio.output(12, gpio.LOW) 
+        gpio.output(BUZZER_PIN, gpio.LOW) 
         time.sleep(3)
         
 
