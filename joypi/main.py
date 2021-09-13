@@ -3,7 +3,7 @@ import RPi.GPIO as gpio
 import sqlite3 as sql
 from sqlite3 import Error
 from datetime import datetime
-
+import time
 
 DB_NAME = "chronos.db"
 DB_FILE = F'../app/{DB_NAME}'
@@ -40,6 +40,7 @@ def RFIDread():
             elif result == "anwesend":
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', ?, ?)", (str(datetime.now()), kartenid))
                 con.commit()
+        time.sleep(4)
         
 
 def create_connection(db_file):
