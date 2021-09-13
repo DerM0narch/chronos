@@ -38,7 +38,7 @@
     {% endif %}
     <p> Status: {{user.benutzerStatus}} {% if current_user.benutzerStatus == "anwesend" %} <i class="bi bi-box-arrow-in-left"></i>
     {% elif current_user.benutzerStatus == "abwesend"%} <i class="bi bi-box-arrow-left" style="color: red"></i>
-    {% elif current_user.benutzerStatus == "in Pause"%} <i class="bi bi-box-arrow-left" style="color: rgb(204,204,0)"></i>
+    {% elif current_user.benutzerStatus == "Pause"%} <i class="bi bi-box-arrow-left" style="color: rgb(204,204,0)"></i>
     {% else %} <i class="bi bi-question-square"></i>
     {% endif %} </p>
 </form>

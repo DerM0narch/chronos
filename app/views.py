@@ -28,9 +28,9 @@ def startseite():
         elif request.form['button_startseite'] == 'button_pause':
             
             statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
-            statusUpdate.benutzerStatus = 'in Pause'
+            statusUpdate.benutzerStatus = 'Pause'
             
-            buchung = Buchung("in Pause", statusUpdate.kartennr)
+            buchung = Buchung("Pause", statusUpdate.kartennr)
             db.session.add(buchung)
             db.session.commit()
             
