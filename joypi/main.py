@@ -17,8 +17,7 @@ def RFIDread():
     """ read the card id and add a 'Buchung' according to the last status of the"""    
     con = create_connection(DB_FILE)
     GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(BUZZER_PIN, GPIO.OUT)
+    
     
     while True:
         try:
@@ -47,6 +46,7 @@ def RFIDread():
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 con.commit()
         GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(BUZZER_PIN, GPIO.OUT)
         GPIO.output(BUZZER_PIN, GPIO.HIGH) 
         time.sleep(1)
         GPIO.output(BUZZER_PIN, GPIO.LOW) 
