@@ -15,6 +15,8 @@ def RFIDread():
     """ read the card id and add a 'Buchung' according to the last status of the"""    
     con = create_connection(DB_FILE)
     gpio.setwarnings(False)
+    gpio.setmode(gpio.BOARD) 
+    gpio.setup(12, gpio.OUT)
     
     while True:
         try:
@@ -63,6 +65,5 @@ def create_connection(db_file):
     return conn
     
 if __name__ == "__main__":
-    gpio.setmode(gpio.BOARD) 
-    gpio.setup(12, gpio.OUT)
+    
     RFIDread()
