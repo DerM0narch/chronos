@@ -46,6 +46,7 @@ def RFIDread():
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', ?, ?)", (str(datetime.now()), kartenid))
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 con.commit()
+        GPIO.setmode(GPIO.BOARD)
         GPIO.output(BUZZER_PIN, GPIO.HIGH) 
         time.sleep(1)
         GPIO.output(BUZZER_PIN, GPIO.LOW) 
