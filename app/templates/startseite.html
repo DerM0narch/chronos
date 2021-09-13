@@ -30,7 +30,7 @@
 <center>
 
 <form method="POST">
-    {% if current_user.benutzerStatus == "abwesend" or current_user.benutzerStatus == "in Pause" %}
+    {% if current_user.benutzerStatus == "abwesend" or current_user.benutzerStatus == "Pause" %}
     <button type="submit" name="button_startseite" value="button_kommen">Kommen stempeln</button><p>
     {% else %}
     <button type="submit" name="button_startseite" value="button_pause">Pause stempeln</button><p>
