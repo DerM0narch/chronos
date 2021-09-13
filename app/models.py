@@ -24,6 +24,9 @@ class Nutzer(db.Model, UserMixin):
     def __repr__(self):
         return f'<Nutzer {self.id} - {self.nutzername}>'
     
+    def __unicode__(self):
+        return self.nutzername or ' '
+    
 
 class Buchung(db.Model):
     id = db.Column(db.Integer, primary_key=True)
