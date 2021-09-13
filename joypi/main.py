@@ -8,6 +8,7 @@ import time
 DB_NAME = "chronos.db"
 DB_FILE = F'../app/{DB_NAME}'
 BUZZER_PIN = 12
+LED_PIN = 37
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUZZER_PIN, GPIO.OUT)
 
@@ -28,7 +29,10 @@ def RFIDread():
             print("text:" + text)
         finally:
             GPIO.cleanup()
-        
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(LED_PIN, GPIO.OUT)
+            GPIO.output(LED_PIN, GPIO.LOW) 
+
         with con:
             
             cur = con.cursor()
@@ -45,12 +49,14 @@ def RFIDread():
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', ?, ?)", (str(datetime.now()), kartenid))
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 con.commit()
-        GPIO.setmode(GPIO.BOARD)
+        
         GPIO.setup(BUZZER_PIN, GPIO.OUT)
         GPIO.output(BUZZER_PIN, GPIO.HIGH) 
-        time.sleep(1)
+        time.sleep(0.5)
         GPIO.output(BUZZER_PIN, GPIO.LOW) 
         time.sleep(3)
+        GPIO.output(LED_PIN, GPIO.LOW) 
+        
         
 
 def create_connection(db_file):
