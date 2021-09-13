@@ -1,8 +1,8 @@
-from app import DB_NAME
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as gpio
 import sqlite3 as sql
 from sqlite3 import Error
+from datetime import datetime
 
 DB_NAME = "chronos.db"
 DB_FILE = F'app/{DB_NAME}'
@@ -11,6 +11,7 @@ DB_FILE = F'app/{DB_NAME}'
 reader = SimpleMFRC522()
 
 def RFIDread():
+    """ read the card id and add a 'Buchung' according to the last status of the"""    
     con = sql.create_connection(DB_FILE)
     gpio.setwarnings(False)
     
@@ -24,13 +25,15 @@ def RFIDread():
             
             cur = con.cursor()
             
-            cur.execute(F"SELECT benutzerstatus from Nutzer where kartennr={kartenid}")
+            cur.execute(F"SELECT benutzerstatus FROM Nutzer WHERE kartennr={kartenid}")
             result = cur.fetchone()
             
             if result == "abwesend" or result == "in Pause":
-                pass
+                cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('anwesend', {datetime.now()}, {kartenid})")
+                con.commit()
             elif result == "anwesend":
-                pass
+                cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', {datetime.now()}, {kartenid})")
+                con.commit()
         
 
 def create_connection(db_file):
