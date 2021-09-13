@@ -63,4 +63,6 @@ def create_connection(db_file):
     return conn
     
 if __name__ == "__main__":
+    gpio.setmode(gpio.BOARD) 
+    gpio.setup(12, gpio.OUT)
     RFIDread()
