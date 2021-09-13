@@ -4,8 +4,9 @@ import sqlite3 as sql
 from sqlite3 import Error
 from datetime import datetime
 
+
 DB_NAME = "chronos.db"
-DB_FILE = F'app/{DB_NAME}'
+DB_FILE = F'../app/{DB_NAME}'
 
 
 reader = SimpleMFRC522()
