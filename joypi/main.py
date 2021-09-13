@@ -12,7 +12,7 @@ reader = SimpleMFRC522()
 
 def RFIDread():
     """ read the card id and add a 'Buchung' according to the last status of the"""    
-    con = sql.create_connection(DB_FILE)
+    con = create_connection(DB_FILE)
     gpio.setwarnings(False)
     
     while True:
