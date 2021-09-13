@@ -19,7 +19,7 @@ def RFIDread():
     while True:
         try:
             kartenscan, text = reader.read()
-            kartenid = str(kartenscan[0])
+            kartenid = str(kartenscan)
             print(kartenid)
             print(type(kartenid))
             print(text)
