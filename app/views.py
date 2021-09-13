@@ -84,6 +84,7 @@ def meinProfil():
                     try:
                         nutzer.passwort = generate_password_hash(neues_passwort_1, method='sha256')
                         db.session.commit()
+                        flash("Ändern erfolgreich!", "succsses")
                     except Exception:
                         flash("Fehler unterlaufen", "error")
                 else:
