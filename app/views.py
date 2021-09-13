@@ -21,7 +21,7 @@ def startseite():
             statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
             statusUpdate.benutzerStatus = 'anwesend'
             
-            buchung = Buchung("kommen", statusUpdate.kartennr)
+            buchung = Buchung("anwesend", statusUpdate.kartennr)
             db.session.add(buchung)
             db.session.commit()
             
