@@ -63,6 +63,7 @@ hr {
 .topnav a:hover {
   background-color: #ddd;
   color: FFFFFF;
+  text-decoration: none; 
 }
 
 .topnav a.active {
