@@ -18,7 +18,7 @@ def RFIDread():
     
     while True:
         try:
-            kartenid = reader.read()
+            kartenid = str(reader.read())
         finally:
             gpio.cleanup()
         
