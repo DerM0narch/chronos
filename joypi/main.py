@@ -35,7 +35,7 @@ def RFIDread():
             print("result:" + result)
             print(type(result))
             if result == "abwesend" or result == "in Pause":
-                cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('anwesend', {str(datetime.now())}, {kartenid})")
+                cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('anwesend', {datetime.now()}, {kartenid})")
                 con.commit()
             elif result == "anwesend":
                 cur.execute(F"INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', {datetime.now()}, {kartenid})")
