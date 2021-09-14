@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
 from .models import Nutzer, Buchung
@@ -15,6 +16,19 @@ def index():
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
 def startseite():
+    # Zeiten berechnen
+    nutzer = Nutzer.query.filter_by(id=current_user.id).first()
+    tagessaldo = None
+    saldoUebrig = None
+    if nutzer:
+        buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr, buchungArt="anwesend").order_by(Buchung.buchungdate.desc()).first()
+        datumNutzer = datetime.fromisoformat(buchungKomm)
+        saldoEnde = datumNutzer + timedelta(hours=8)
+        saldoUebrigUnformartiert = saldoEnde - datetime.now()
+        tagessaldoUnformartiert = datetime.now() - datumNutzer
+        saldoUebrig = f"{saldoUebrigUnformartiert.hour}.add(){saldoUebrigUnformartiert.minute}"
+        tagessaldo = f"{tagessaldoUnformartiert.hour}.{tagessaldoUnformartiert.minute}"
+    # Status verändern
     if request.method == 'POST':
         statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
 
@@ -41,7 +55,11 @@ def startseite():
             db.session.add(buchung)
             db.session.commit()    
 
-    return render_template('startseite.html', user=current_user)
+    data = {"user": current_user,
+            "tagessaldo": tagessaldo,
+            "saldoUebrig": saldoUebrig}
+    
+    return render_template('startseite.html', data)
 
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
@@ -84,7 +102,7 @@ def meinProfil():
                     try:
                         nutzer.passwort = generate_password_hash(neues_passwort_1, method='sha256')
                         db.session.commit()
-                        flash("Ändern erfolgreich!", "succsses")
+                        flash("Ändern erfolgreich!", "success")
                     except Exception:
                         flash("Fehler unterlaufen", "error")
                 else:
@@ -95,3 +113,8 @@ def meinProfil():
     return render_template('meinProfil.html', user=current_user)
 
 
+@views.route('/status')
+@login_required()
+def meinStatus():
+    
+    return render_template('meinStatus.html', data)
