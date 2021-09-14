@@ -22,6 +22,8 @@ def startseite():
     saldoUebrig = None
     if nutzer:
         buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr, buchungArt="anwesend").order_by(Buchung.buchungdate.desc()).first()
+        print(buchungKomm)
+        print(type(buchungKomm))
         datumNutzer = datetime.fromisoformat(buchungKomm)
         saldoEnde = datumNutzer + timedelta(hours=8)
         saldoUebrigUnformartiert = saldoEnde - datetime.now()
