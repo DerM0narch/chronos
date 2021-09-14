@@ -111,10 +111,3 @@ def meinProfil():
                 flash("Altes Passwort falsch", "error")
 
     return render_template('meinProfil.html', user=current_user)
-
-
-@views.route('/status')
-@login_required()
-def meinStatus():
-    
-    return render_template('meinStatus.html', data)
