@@ -24,7 +24,9 @@ def startseite():
         datumNutzer = datetime.fromisoformat(buchungKomm)
         saldoEnde = datumNutzer + timedelta(hours=8)
         saldoUebrigUnformartiert = saldoEnde - datetime.now()
+        print(saldoUebrigUnformartiert)
         tagessaldoUnformartiert = datetime.now() - datumNutzer
+        print(tagessaldoUnformartiert)
         saldoUebrig = F"{saldoUebrigUnformartiert.hour}.{saldoUebrigUnformartiert.minute}"
         tagessaldo = F"{tagessaldoUnformartiert.hour}.{tagessaldoUnformartiert.minute}"
     # Status verändern
