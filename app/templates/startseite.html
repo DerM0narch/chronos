@@ -25,7 +25,7 @@
 {% if current_user.id == 1 %}
 <h3>Admin Menu</h3>
 {% else %}
-<h3>Willkommen, {{user.vname}}</h3>
+<h3>Willkommen, {{current_user.vname}}</h3>
 {% endif %}
 <center>
 
@@ -36,13 +36,13 @@
     <button type="submit" name="button_startseite" value="button_pause">Pause stempeln</button><p>
     <button type="submit" name="button_startseite" value="button_gehen">Geht</button><p>
     {% endif %}
-    <p> Status: {{user.benutzerStatus}} {% if current_user.benutzerStatus == "anwesend" %} <i class="bi bi-box-arrow-in-left"></i>
+    <p> Status: {{current_user.benutzerStatus}} {% if current_user.benutzerStatus == "anwesend" %} <i class="bi bi-box-arrow-in-left"></i>
     {% elif current_user.benutzerStatus == "abwesend"%} <i class="bi bi-box-arrow-left" style="color: red"></i>
     {% elif current_user.benutzerStatus == "Pause"%} <i class="bi bi-box-arrow-left" style="color: rgb(204,204,0)"></i>
     {% else %} <i class="bi bi-question-square"></i>
     {% endif %} </p>
-    <p> Tagessaldo: {{tagessaldo}} </p>
-    <p> übrige Saldo: {{saldoUebrig}} </p>
+    <p> Tagessaldo: {{data["tagessaldo"]}} </p>
+    <p> übrige Saldo: {{data["saldoUebrig"]}} </p>
 </form>
 
 
