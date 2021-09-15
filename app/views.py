@@ -9,6 +9,7 @@ from .auth import auth
 views = Blueprint('views', __name__)
 
 
+
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
 def startseite():
@@ -26,8 +27,10 @@ def startseite():
         print(saldoUebrigUnformartiert)
         tagessaldoUnformartiert = datetime.now() - datumNutzer
         print(tagessaldoUnformartiert)
-        saldoUebrig = F"{saldoUebrigUnformartiert}"
-        tagessaldo = F"{tagessaldoUnformartiert}"
+        UebrigSekunden = saldoUebrigUnformartiert.total_seconds()
+        saldoUebrig = F"{UebrigSekunden / 3600}.{(UebrigSekunden / 60) % 60}"
+        saldoSekunden = tagessaldoUnformartiert.total_seconds()
+        tagessaldo = F"{saldoSekunden / 3600}.{(saldoSekunden / 60) % 60}"
     # Status verändern
     if request.method == 'POST':
         statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
