@@ -9,9 +9,6 @@ from .auth import auth
 views = Blueprint('views', __name__)
 
 
-@views.route("/index", methods=["GET", "POST"])
-def index():
-    return redirect(url_for("auth.login"), user=current_user)
 
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
