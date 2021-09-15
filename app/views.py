@@ -26,8 +26,8 @@ def startseite():
         print(saldoUebrigUnformartiert)
         tagessaldoUnformartiert = datetime.now() - datumNutzer
         print(tagessaldoUnformartiert)
-        saldoUebrig = F"{saldoUebrigUnformartiert.hour}.{saldoUebrigUnformartiert.minute}"
-        tagessaldo = F"{tagessaldoUnformartiert.hour}.{tagessaldoUnformartiert.minute}"
+        saldoUebrig = F"{saldoUebrigUnformartiert}"
+        tagessaldo = F"{tagessaldoUnformartiert}"
     # Status verändern
     if request.method == 'POST':
         statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
