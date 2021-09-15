@@ -15,8 +15,8 @@ views = Blueprint('views', __name__)
 def startseite():
     # Zeiten berechnen
     # nutzer = Nutzer.query.filter_by(id=current_user.id).first()
-    # tagessaldo = None
-    # saldoUebrig = None
+    tagessaldo = None
+    saldoUebrig = None
     # if nutzer:
     #     buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr).order_by(Buchung.buchungdate.desc()).first()
     #     print(buchungKomm.buchungdate)
