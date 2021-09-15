@@ -24,7 +24,7 @@ def RFIDread():
         try:
             kartenscan, text = reader.read()
             kartenid = str(kartenscan)
-            print("id:" + kartenid)
+            print("Kartenid: " + kartenid)
             print(type(kartenid))
             print("text:" + text)
         finally:
@@ -40,15 +40,16 @@ def RFIDread():
             
             cur.execute("SELECT benutzerStatus FROM Nutzer WHERE kartennr=?", (kartenid,))
             result = str(cur.fetchone()[0])
-            print("result:" + result)
-            print(type(result))
+            print("alter Status: " + result)
             if result == "abwesend" or result == "Pause":
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('anwesend', ?, ?)", (str(datetime.now()), kartenid))
                 cur.execute("UPDATE Nutzer SET benutzerStatus='anwesend' WHERE kartennr=?", (kartenid,))
+                print("neuer Status: anwesend")
                 con.commit()
             elif result == "anwesend":
                 cur.execute("INSERT INTO Buchung (buchungArt, buchungdate, n_kartennr) VALUES ('abwesend', ?, ?)", (str(datetime.now()), kartenid))
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
+                print("neuer Status: abwesend")
                 con.commit()
         
         # Buzzer als Feedback
