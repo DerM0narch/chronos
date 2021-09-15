@@ -20,7 +20,7 @@ def startseite():
         buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr).order_by(Buchung.buchungdate.desc()).first()
         print(buchungKomm.buchungdate)
         print(type(buchungKomm.buchungdate))
-        datumNutzer = datetime.fromisoformat(buchungKomm)
+        datumNutzer = buchungKomm.buchungdate
         saldoEnde = datumNutzer + timedelta(hours=8)
         saldoUebrigUnformartiert = saldoEnde - datetime.now()
         print(saldoUebrigUnformartiert)
