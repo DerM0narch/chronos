@@ -25,8 +25,6 @@ def RFIDread():
             kartenscan, text = reader.read()
             kartenid = str(kartenscan)
             print("Kartenid: " + kartenid)
-            print(type(kartenid))
-            print("text:" + text)
         finally:
             GPIO.cleanup()
             GPIO.setmode(GPIO.BOARD)
@@ -51,7 +49,7 @@ def RFIDread():
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 print("neuer Status: abwesend")
                 con.commit()
-        
+        print("--------------")
         # Buzzer als Feedback
         GPIO.setup(BUZZER_PIN, GPIO.OUT)
         GPIO.output(BUZZER_PIN, GPIO.HIGH) 
