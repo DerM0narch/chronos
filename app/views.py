@@ -14,25 +14,25 @@ views = Blueprint('views', __name__)
 @login_required
 def startseite():
     # Zeiten berechnen
-    nutzer = Nutzer.query.filter_by(id=current_user.id).first()
-    tagessaldo = None
-    saldoUebrig = None
-    if nutzer:
-        buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr).order_by(Buchung.buchungdate.desc()).first()
-        print(buchungKomm.buchungdate)
-        print(type(buchungKomm.buchungdate))
-        datumNutzer = buchungKomm.buchungdate
-        saldoEnde = datumNutzer + timedelta(hours=8)
-        saldoUebrigUnformartiert = saldoEnde - datetime.now()
-        print(saldoUebrigUnformartiert)
-        tagessaldoUnformartiert = datetime.now() - datumNutzer
-        print(tagessaldoUnformartiert)
-        UebrigSekunden = saldoUebrigUnformartiert.total_seconds()
-        uebrigZero = "0" if int((UebrigSekunden / 60) % 60 < 10) else ""
-        saldoUebrig = F"{int(UebrigSekunden / 3600)}.{uebrigZero}{int((UebrigSekunden / 60) % 60)}"
-        saldoSekunden = tagessaldoUnformartiert.total_seconds()
-        zeroSaldo = "0" if int((saldoSekunden / 60) % 60 + 1 < 10) else ""
-        tagessaldo = F"{int(saldoSekunden / 3600)}.{zeroSaldo}{int((saldoSekunden / 60) % 60 + 1)}"
+    # nutzer = Nutzer.query.filter_by(id=current_user.id).first()
+    # tagessaldo = None
+    # saldoUebrig = None
+    # if nutzer:
+    #     buchungKomm = Buchung.query.filter_by(n_kartennr=nutzer.kartennr).order_by(Buchung.buchungdate.desc()).first()
+    #     print(buchungKomm.buchungdate)
+    #     print(type(buchungKomm.buchungdate))
+    #     datumNutzer = buchungKomm.buchungdate
+    #     saldoEnde = datumNutzer + timedelta(hours=8)
+    #     saldoUebrigUnformartiert = saldoEnde - datetime.now()
+    #     print(saldoUebrigUnformartiert)
+    #     tagessaldoUnformartiert = datetime.now() - datumNutzer
+    #     print(tagessaldoUnformartiert)
+    #     UebrigSekunden = saldoUebrigUnformartiert.total_seconds()
+    #     uebrigZero = "0" if int((UebrigSekunden / 60) % 60 < 10) else ""
+    #     saldoUebrig = F"{int(UebrigSekunden / 3600)}.{uebrigZero}{int((UebrigSekunden / 60) % 60)}"
+    #     saldoSekunden = tagessaldoUnformartiert.total_seconds()
+    #     zeroSaldo = "0" if int((saldoSekunden / 60) % 60 + 1 < 10) else ""
+    #     tagessaldo = F"{int(saldoSekunden / 3600)}.{zeroSaldo}{int((saldoSekunden / 60) % 60 + 1)}"
     # Status verändern
     if request.method == 'POST':
         statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
