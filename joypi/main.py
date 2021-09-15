@@ -31,7 +31,7 @@ def RFIDread():
             GPIO.cleanup()
             GPIO.setmode(GPIO.BOARD)
             GPIO.setup(LED_PIN, GPIO.OUT)
-            GPIO.output(LED_PIN, GPIO.HIGH) 
+            GPIO.output(LED_PIN, GPIO.LOW) 
 
         # Datenbankeintrag in Buchung
         with con:
@@ -57,7 +57,7 @@ def RFIDread():
         time.sleep(0.5)
         GPIO.output(BUZZER_PIN, GPIO.LOW) 
         time.sleep(3)
-        GPIO.output(LED_PIN, GPIO.LOW) 
+        GPIO.output(LED_PIN, GPIO.HIGH) 
         
         
 
