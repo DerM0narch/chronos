@@ -9,7 +9,6 @@ from .auth import auth
 views = Blueprint('views', __name__)
 
 
-
 @views.route("/startseite", methods=["GET", "POST"])
 @login_required
 def startseite():
@@ -56,6 +55,7 @@ def startseite():
             db.session.add(buchung)
             db.session.commit()    
 
+    # Dictionary zur Webseite
     data = {"user": current_user,
             "tagessaldo": tagessaldo,
             "saldoUebrig": saldoUebrig}
@@ -65,9 +65,12 @@ def startseite():
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
 def nutzeranlegen():
+    # Adminüberprüfung
     if current_user.id != 1:
         flash("No Access", "error")
         return redirect(url_for('auth.login'))
+    
+    # Anlegen eines Nutzers
     if request.method=="POST":
         try:
             A_nname = request.form.get('nname')
@@ -90,13 +93,14 @@ def nutzeranlegen():
 
 @views.route('/meinprofil', methods=["GET", "POST"])
 def meinProfil():
-    #altes Passwort prüfen
+    
     if request.method == 'POST':
         passwort = request.form.get('altes_passwort')
         neues_passwort_1 = request.form.get('neues_passwort_1')
         neues_passwort_2 = request.form.get('neues_passwort_2')
         nutzer = Nutzer.query.filter_by(id=current_user.id).first()
         
+        # altes Passwort prüfen
         if nutzer:
             if check_password_hash(nutzer.passwort, passwort):
                 if neues_passwort_1 == neues_passwort_2:

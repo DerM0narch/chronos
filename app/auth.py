@@ -9,8 +9,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.route("/", methods=["GET", "POST"])
 def login():
+    # Authentifizierung
     if current_user.is_authenticated:
         return redirect(url_for("views.startseite", user=current_user))
+    # Log in
     if request.method == 'POST':
         username = request.form.get('user')
         passwort = request.form.get('password')

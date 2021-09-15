@@ -1,9 +1,13 @@
+"""Datenbank mit SQLAlchemy in sqlite3"""
+
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 from datetime import datetime
 
 class Nutzer(db.Model, UserMixin):
+    """Nutzer - Klasse"""
+    
     id = db.Column(db.Integer, primary_key=True)
     nname = db.Column(db.String(50))
     vname = db.Column(db.String(50))
@@ -29,6 +33,8 @@ class Nutzer(db.Model, UserMixin):
     
 
 class Buchung(db.Model):
+    """Buchung - Klasse"""
+    
     id = db.Column(db.Integer, primary_key=True)
     buchungArt = db.Column(db.String(10),)
     buchungdate = db.Column(db.DateTime, default=datetime.now())

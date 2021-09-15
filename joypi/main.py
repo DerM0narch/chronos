@@ -15,11 +15,11 @@ GPIO.setup(BUZZER_PIN, GPIO.OUT)
 reader = SimpleMFRC522()
 
 def RFIDread():
-    """ read the card id and add a 'Buchung' according to the last status of the"""    
+    """ read the card id and add a 'Buchung' according to the last status of User"""    
     con = create_connection(DB_FILE)
     GPIO.setwarnings(False)
     
-    
+    # Karte lesen
     while True:
         try:
             kartenscan, text = reader.read()
@@ -33,6 +33,7 @@ def RFIDread():
             GPIO.setup(LED_PIN, GPIO.OUT)
             GPIO.output(LED_PIN, GPIO.LOW) 
 
+        # Datenbankeintrag in Buchung
         with con:
             
             cur = con.cursor()
@@ -50,6 +51,7 @@ def RFIDread():
                 cur.execute("UPDATE Nutzer SET benutzerStatus='abwesend' WHERE kartennr=?", (kartenid,))
                 con.commit()
         
+        # Buzzer als Feedback
         GPIO.setup(BUZZER_PIN, GPIO.OUT)
         GPIO.output(BUZZER_PIN, GPIO.HIGH) 
         time.sleep(0.5)
@@ -74,5 +76,4 @@ def create_connection(db_file):
     return conn
     
 if __name__ == "__main__":
-    
     RFIDread()
