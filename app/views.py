@@ -31,8 +31,8 @@ def startseite():
         uebrigZero = "0" if int((UebrigSekunden / 60) % 60 < 10) else ""
         saldoUebrig = F"{int(UebrigSekunden / 3600)}.{uebrigZero}{int((UebrigSekunden / 60) % 60)}"
         saldoSekunden = tagessaldoUnformartiert.total_seconds()
-        zeroSaldo = "0" if int((saldoSekunden / 60) % 60 < 10) else ""
-        tagessaldo = F"{int(saldoSekunden / 3600)}.{zeroSaldo}{int((saldoSekunden / 60) % 60)}"
+        zeroSaldo = "0" if int((saldoSekunden / 60) % 60 + 1 < 10) else ""
+        tagessaldo = F"{int(saldoSekunden / 3600)}.{zeroSaldo}{int((saldoSekunden / 60) % 60 + 1)}"
     # Status verändern
     if request.method == 'POST':
         statusUpdate = Nutzer.query.filter_by(id=current_user.id).first()
