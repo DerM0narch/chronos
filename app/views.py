@@ -60,7 +60,7 @@ def startseite():
             "tagessaldo": tagessaldo,
             "saldoUebrig": saldoUebrig}
     
-    return render_template('startseite.html', data)
+    return render_template('startseite.html', data=data)
 
 
 @views.route('/nutzeranlegen', methods=["GET", "POST"])
