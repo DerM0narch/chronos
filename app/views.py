@@ -88,8 +88,9 @@ def nutzeranlegen():
 
             db.session.add(benutzer)
             db.session.commit()
-        except Exception:
+        except Exception as e:
             flash("Es ist ein Fehler unterlaufen", category='error')
+            print(e)
         else:
             flash("Nutzer erfolgreich erstellt", category="success")
             
@@ -113,8 +114,9 @@ def meinProfil():
                         nutzer.passwort = generate_password_hash(neues_passwort_1, method='sha256')
                         db.session.commit()
                         flash("Ändern erfolgreich!", "success")
-                    except Exception:
+                    except Exception as e:
                         flash("Fehler unterlaufen", "error")
+                        print(e)
                 else:
                     flash("Neue Passwörter sind nicht identtisch", "error")
             else:

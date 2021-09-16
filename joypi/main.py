@@ -25,6 +25,8 @@ def RFIDread():
             kartenscan, text = reader.read()
             kartenid = str(kartenscan)
             print("Kartenid: " + kartenid)
+        except Exception as e:
+            print(e)
         finally:
             GPIO.cleanup()
             GPIO.setmode(GPIO.BOARD)
